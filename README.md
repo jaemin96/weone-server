@@ -1,2 +1,0 @@
-# weone-server
-weone server
