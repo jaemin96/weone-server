@@ -7,7 +7,7 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => [UserDto])
-  async getAllUsers(): Promise<UserDto[]> {
+  async users(): Promise<UserDto[]> {
     return this.userService.getAllUsers();
   }
 }
