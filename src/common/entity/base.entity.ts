@@ -22,5 +22,5 @@ export abstract class BaseEntity {
 
   @DeleteDateColumn()
   @Field((type) => Date, { nullable: true })
-  deletedAt?: Date;
+  deletedAt?: Date | null;
 }
