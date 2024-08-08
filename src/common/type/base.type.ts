@@ -1,6 +1,6 @@
 import { Field, Int } from '@nestjs/graphql';
 
-export class BaseType {
+export abstract class BaseType {
   @Field(() => Int)
   id: number;
 
