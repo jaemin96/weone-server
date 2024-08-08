@@ -3,15 +3,14 @@ import { BaseOutput } from 'src/common';
 import { User } from '../entities';
 
 @InputType()
-export class CreateUserInput extends OmitType(User, [
-  'id',
+export class UpdateUserInput extends OmitType(User, [
   'createdAt',
   'updatedAt',
   'deletedAt',
 ]) {}
 
 @ObjectType()
-export class CreateUserOutput extends BaseOutput {
+export class UpdateUserOutput extends BaseOutput {
   @Field((type) => Number, { nullable: true })
   id?: number;
 }
