@@ -10,7 +10,7 @@ export abstract class ErrorOutput {
 }
 
 @ObjectType()
-export class BaseDto {
+export class BaseOutput {
   @Field((type) => ErrorOutput, { nullable: true })
   message?: ErrorOutput;
 }
