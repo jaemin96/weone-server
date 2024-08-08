@@ -2,12 +2,58 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   users: [UserDto!]!
+}
+
+type User {
+  """자동로그인 여부"""
+  autoLogin: Boolean!
+  createdAt: DateTime
+  deletedAt: DateTime
+
+  """유저 이메일"""
+  email: String!
+
+  """유저 등급"""
+  grade: UserGrade!
+  id: Float
+
+  """유저 비밀번호"""
+  password: String!
+  profile: UserProfile
+  updatedAt: DateTime
 }
 
 type UserDto {
   email: String!
   id: ID!
   name: String!
+}
+
+enum UserGrade {
+  admin
+  default
+}
+
+type UserProfile {
+  createdAt: DateTime
+  deletedAt: DateTime
+  id: Float
+
+  """유저 이름"""
+  name: String
+
+  """유저 닉네임"""
+  nickname: String
+  updatedAt: DateTime
+  user: User!
+
+  """유저 번호"""
+  userId: Float!
 }
