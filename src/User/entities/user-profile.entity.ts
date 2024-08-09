@@ -10,12 +10,8 @@ import { BaseEntity } from 'src/common/entity/base.entity';
 @ObjectType()
 @Entity({ schema: 'weone', name: 'userProfile' })
 export class UserProfile extends BaseEntity {
-  @Field((type) => String, { nullable: true, description: '유저 이름' })
-  @Column('varchar')
-  name: string;
-
   @Field((type) => String, { nullable: true, description: '유저 닉네임' })
-  @Column('varchar')
+  @Column('varchar', { nullable: true })
   nickname: string;
 
   // 외래키 필드

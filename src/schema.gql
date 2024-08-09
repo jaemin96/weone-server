@@ -2,38 +2,121 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateUserInput {
+  """자동로그인 여부"""
+  autoLogin: Boolean
+
+  """유저 이메일"""
+  email: String
+
+  """유저 등급"""
+  grade: UserGrade
+
+  """유저 이름"""
+  name: String
+
+  """유저 비밀번호"""
+  password: String
+  profile: UserProfileType
+}
+
+type CreateUserOutput {
+  id: Float
+  message: ErrorOutput
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
 
+input DeleteUserInput {
+  id: Float!
+}
+
+type DeleteUserOutput {
+  id: Float
+  message: ErrorOutput
+}
+
+type ErrorOutput {
+  code: String
+  message: String
+}
+
+input GetUserInput {
+  id: Float!
+}
+
+input GetUserListInput {
+  email: String
+}
+
+type GetUserListOutput {
+  message: ErrorOutput
+  users: [User!]!
+}
+
+type GetUserOutput {
+  message: ErrorOutput
+  user: User
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): CreateUserOutput!
+  deleteUser(input: DeleteUserInput!): DeleteUserOutput!
+  updateUser(input: UpdateUserInput!): UpdateUserOutput!
+}
+
 type Query {
-  users: [UserDto!]!
+  getUser(input: GetUserInput!): GetUserOutput!
+  getUserList(input: GetUserListInput): GetUserListOutput!
+}
+
+input UpdateUserInput {
+  """자동로그인 여부"""
+  autoLogin: Boolean
+
+  """유저 이메일"""
+  email: String
+
+  """유저 등급"""
+  grade: UserGrade
+  id: Float
+
+  """유저 이름"""
+  name: String
+
+  """유저 비밀번호"""
+  password: String
+  profile: UserProfileType
+}
+
+type UpdateUserOutput {
+  id: Float
+  message: ErrorOutput
 }
 
 type User {
   """자동로그인 여부"""
-  autoLogin: Boolean!
+  autoLogin: Boolean
   createdAt: DateTime
   deletedAt: DateTime
 
   """유저 이메일"""
-  email: String!
+  email: String
 
   """유저 등급"""
-  grade: UserGrade!
+  grade: UserGrade
   id: Float
 
+  """유저 이름"""
+  name: String
+
   """유저 비밀번호"""
-  password: String!
+  password: String
   profile: UserProfile
   updatedAt: DateTime
-}
-
-type UserDto {
-  email: String!
-  id: ID!
-  name: String!
 }
 
 enum UserGrade {
@@ -46,9 +129,6 @@ type UserProfile {
   deletedAt: DateTime
   id: Float
 
-  """유저 이름"""
-  name: String
-
   """유저 닉네임"""
   nickname: String
   updatedAt: DateTime
@@ -56,4 +136,33 @@ type UserProfile {
 
   """유저 번호"""
   userId: Float!
+}
+
+"""유저 정보 테이블"""
+input UserProfileType {
+  """유저 닉네임"""
+  nickname: String
+  user: UserType!
+
+  """유저 번호"""
+  userId: Float!
+}
+
+"""유저 테이블"""
+input UserType {
+  """자동로그인 여부"""
+  autoLogin: Boolean
+
+  """유저 이메일"""
+  email: String
+
+  """유저 등급"""
+  grade: UserGrade
+
+  """유저 이름"""
+  name: String
+
+  """유저 비밀번호"""
+  password: String
+  profile: UserProfileType
 }
