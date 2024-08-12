@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './User/user.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
+
+// Modules
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
+import { UserModule } from './User/user.module';
+import { PostModule } from './Post/post.module';
 
 dotenv.config();
 
@@ -31,6 +34,7 @@ dotenv.config();
       sortSchema: true,
     }),
     UserModule,
+    PostModule,
   ],
   providers: [{ provide: APP_PIPE, useClass: ValidationPipe }],
 })
