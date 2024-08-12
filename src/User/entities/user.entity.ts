@@ -1,8 +1,9 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, OneToOne } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 import { UserGrade } from '../enum';
 import { UserProfile } from './user-profile.entity';
 import { BaseEntity } from 'src/common/entity/base.entity';
+import { Post } from 'src/Post/entities/post.entity';
 
 @InputType('UserType', { isAbstract: true, description: '유저 테이블' })
 @ObjectType()
@@ -32,4 +33,8 @@ export class User extends BaseEntity {
   @Field((type) => UserProfile, { nullable: true })
   @OneToOne((type) => UserProfile, (profile) => profile.user)
   profile: UserProfile;
+
+  @Field((type) => [Post], { nullable: true })
+  @OneToMany((type) => Post, (post) => post.user, { eager: true })
+  posts: Post[];
 }
